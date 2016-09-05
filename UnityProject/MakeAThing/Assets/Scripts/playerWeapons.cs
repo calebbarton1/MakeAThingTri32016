@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class playerWeapons : MonoBehaviour {
+public class playerWeapons : MonoBehaviour
+{
+
+    public static playerWeapons instance;
 
     public enum Weapons
     {
@@ -22,13 +25,20 @@ public class playerWeapons : MonoBehaviour {
 
 
     public float reloadTime;
-    private float currReload = 0;
+    public float currReload = 0;
 
     private GameObject weapPref;
 
-  	
-	// Update is called once per frame
-	void Update ()
+    public void Awake()
+    {
+        if (instance != null)
+            Destroy(this);
+        else
+            instance = this;
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         currReload -= Time.deltaTime;
 
@@ -60,26 +70,41 @@ public class playerWeapons : MonoBehaviour {
     public void Fire()
     {
         GameObject bullet = Instantiate(weapPref, transform.position, transform.rotation) as GameObject;
-        currReload = reloadTime; 
+        currReload = reloadTime;
     }
 
     public void GameInputs()
     {
-        if (Input.GetAxis("Swap") == 1)
+        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetMouseButtonDown(1))
         {
+            ++currWeapon;
+
             if (currWeapon == Weapons.weaponDefault)
             {
                 currWeapon = 0;
-                return;
+            }
+        }
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        {
+            ++currWeapon;
+
+            if (currWeapon == Weapons.weaponDefault)
+            {
+                currWeapon = 0;
+            }
+        }
+
+        if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        {
+            if (currWeapon == Weapons.LongBow)
+            {
+                currWeapon = (Weapons)3;
             }
 
             else
-            {
-                ++currWeapon;
-            }
-                            
+                --currWeapon;
         }
-            
 
         if (Input.GetAxis("Fire1") == 1 && currReload < 0)
         {

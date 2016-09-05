@@ -4,7 +4,6 @@ using System.Collections;
 public class playerMove : MonoBehaviour
 {
     public float speed;
-    private float rate;
     private Rigidbody2D rb;
 
     // Use this for initialization
@@ -18,7 +17,6 @@ public class playerMove : MonoBehaviour
     {
         float moveDirVert = Input.GetAxis("Vertical");
         float moveDirHor = Input.GetAxis("Horizontal");
-        rate = speed * Time.deltaTime;
         Move(moveDirHor, moveDirVert);
     }
 

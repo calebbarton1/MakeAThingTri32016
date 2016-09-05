@@ -6,15 +6,7 @@ public class projectileBehaviour : MonoBehaviour {
     public float time;
     private float currAge;
     public float speed;
-    public AnimationCurve speedCurve;
-
-    private Rigidbody2D rb;
-
-	// Use this for initialization
-	void Start ()
-    {
-        rb = GetComponent<Rigidbody2D>();	
-	}
+    public AnimationCurve speedCurve;	
 	
 	// Update is called once per frame
 	void Update ()

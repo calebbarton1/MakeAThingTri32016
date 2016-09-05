@@ -4,11 +4,6 @@ using System.Collections;
 public class CameraBeh : MonoBehaviour {
 
     public Transform target;
-
-	// Use this for initialization
-	void Start () {
-	
-	}
 	
 	// Update is called once per frame
 	void FixedUpdate ()
